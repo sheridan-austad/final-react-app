@@ -1,7 +1,3 @@
-// import React, { Component } from 'react'
-// import './App.css'
-// import './Bootstrap.css'
-
 
 const Home = () => {
 
@@ -17,6 +13,4 @@ const Home = () => {
         </div>
     )
 }
-// spitting words on the page 
-
 export default Home

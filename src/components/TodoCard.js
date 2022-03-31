@@ -1,12 +1,11 @@
 
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 
 const TodoCard = ({ todo }) => {
 
-  const itemDeletedEvent = new Event("ItemDeleted")
+  const history = useHistory()
 
-  console.log("Making Card");
-  console.log(todo);
+  const itemDeletedEvent = new Event("ItemDeleted")
 
   function deleteTodo() {
     console.log(`Deleting Item ${todo.id}`);
@@ -18,7 +17,20 @@ const TodoCard = ({ todo }) => {
     deleteButton.classList.add('activeDelete')
     document.dispatchEvent(itemDeletedEvent)
   }
+
+  const handleComplete = (e) => {
+    fetch(`http://127.0.0.1:9393/todos/${todo.id}`, {
+      method: "PATCH",
+      headers: {
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify({completed: !todo.completed})
+  })
+      .then(() => history.push("/todos/profile"))
+      .catch(() => alert("todo cannot be updated"))
+}
   
+
   return (
     (<div className="card">
       <p>Username:  
@@ -26,7 +38,8 @@ const TodoCard = ({ todo }) => {
       </p>
       <p>Type of task: {todo.name}</p>
       <p>Task: {todo.task}</p>
-      <p>Completed: {todo.completed ? "true" : "false"} </p>
+      <p>Completed: {String(todo.completed)} </p>
+      <button onClick={handleComplete}>{todo.completed ? "Completed" : "Please Complete"}</button>
       <button id={`deleteBtn${todo.id}`} onClick={deleteTodo}>DELETE</button>
     </div>)
 

@@ -1,7 +1,6 @@
 import {useHistory} from "react-router-dom";
 import { useState } from "react";
 import TodoCard from "./TodoCard";
-import TodoList from "./TodoList";
 
 const UserProfile = () => {
   const [newUser, setNewUser] = useState({username:"", email: ""});
@@ -22,7 +21,6 @@ const UserProfile = () => {
       .then(resp => resp.json())
       .then(newUser => history.push("/todos/new"))
   }
-  console.log(newUser)
 
   const handleSubmitExisting = (e) => {
     e.preventDefault(console.log("get todo for existing user"))

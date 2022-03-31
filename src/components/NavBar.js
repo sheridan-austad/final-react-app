@@ -10,7 +10,6 @@ const style = {
     textDecoration: 'none',
     color: 'white'
 }
-// creating the navbar
 
 const NavBar = () => {
     return (
@@ -57,7 +56,6 @@ const NavBar = () => {
             </NavLink>
         </div>
     )
-    // putting in the links
 }
 
 
